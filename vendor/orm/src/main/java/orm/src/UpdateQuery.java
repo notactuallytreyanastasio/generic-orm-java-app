@@ -8,76 +8,76 @@ public final class UpdateQuery {
     public final List<SetClause> setClauses;
     public final List<WhereClause> conditions;
     public final @Nullable Integer limitVal;
-    public UpdateQuery set(SafeIdentifier field__986, SqlPart value__987) {
-        List<SetClause> nb__989 = new ArrayList<>(this.setClauses);
-        Core.listAdd(nb__989, new SetClause(field__986, value__987));
-        return new UpdateQuery(this.tableName, List.copyOf(nb__989), this.conditions, this.limitVal);
+    public UpdateQuery set(SafeIdentifier field__1067, SqlPart value__1068) {
+        List<SetClause> nb__1070 = new ArrayList<>(this.setClauses);
+        Core.listAdd(nb__1070, new SetClause(field__1067, value__1068));
+        return new UpdateQuery(this.tableName, List.copyOf(nb__1070), this.conditions, this.limitVal);
     }
-    public UpdateQuery where(SqlFragment condition__991) {
-        List<WhereClause> nb__993 = new ArrayList<>(this.conditions);
-        Core.listAdd(nb__993, new AndCondition(condition__991));
-        return new UpdateQuery(this.tableName, this.setClauses, List.copyOf(nb__993), this.limitVal);
+    public UpdateQuery where(SqlFragment condition__1072) {
+        List<WhereClause> nb__1074 = new ArrayList<>(this.conditions);
+        Core.listAdd(nb__1074, new AndCondition(condition__1072));
+        return new UpdateQuery(this.tableName, this.setClauses, List.copyOf(nb__1074), this.limitVal);
     }
-    public UpdateQuery orWhere(SqlFragment condition__995) {
-        List<WhereClause> nb__997 = new ArrayList<>(this.conditions);
-        Core.listAdd(nb__997, new OrCondition(condition__995));
-        return new UpdateQuery(this.tableName, this.setClauses, List.copyOf(nb__997), this.limitVal);
+    public UpdateQuery orWhere(SqlFragment condition__1076) {
+        List<WhereClause> nb__1078 = new ArrayList<>(this.conditions);
+        Core.listAdd(nb__1078, new OrCondition(condition__1076));
+        return new UpdateQuery(this.tableName, this.setClauses, List.copyOf(nb__1078), this.limitVal);
     }
-    public UpdateQuery limit(int n__999) {
-        if (n__999 < 0) {
+    public UpdateQuery limit(int n__1080) {
+        if (n__1080 < 0) {
             throw Core.bubble();
         }
-        return new UpdateQuery(this.tableName, this.setClauses, this.conditions, n__999);
+        return new UpdateQuery(this.tableName, this.setClauses, this.conditions, n__1080);
     }
     public SqlFragment toSql() {
-        int t_9890;
-        int t_9904;
+        int t_10390;
+        int t_10404;
         if (this.conditions.isEmpty()) {
             throw Core.bubble();
         }
         if (this.setClauses.isEmpty()) {
             throw Core.bubble();
         }
-        SqlBuilder b__1003 = new SqlBuilder();
-        b__1003.appendSafe("UPDATE ");
-        b__1003.appendSafe(this.tableName.getSqlValue());
-        b__1003.appendSafe(" SET ");
-        b__1003.appendSafe(Core.listGet(this.setClauses, 0).getField().getSqlValue());
-        b__1003.appendSafe(" = ");
-        b__1003.appendPart(Core.listGet(this.setClauses, 0).getValue());
-        int i__1004 = 1;
+        SqlBuilder b__1084 = new SqlBuilder();
+        b__1084.appendSafe("UPDATE ");
+        b__1084.appendSafe(this.tableName.getSqlValue());
+        b__1084.appendSafe(" SET ");
+        b__1084.appendSafe(Core.listGet(this.setClauses, 0).getField().getSqlValue());
+        b__1084.appendSafe(" = ");
+        b__1084.appendPart(Core.listGet(this.setClauses, 0).getValue());
+        int i__1085 = 1;
         while (true) {
-            t_9890 = this.setClauses.size();
-            if (i__1004 >= t_9890) {
+            t_10390 = this.setClauses.size();
+            if (i__1085 >= t_10390) {
                 break;
             }
-            b__1003.appendSafe(", ");
-            b__1003.appendSafe(Core.listGet(this.setClauses, i__1004).getField().getSqlValue());
-            b__1003.appendSafe(" = ");
-            b__1003.appendPart(Core.listGet(this.setClauses, i__1004).getValue());
-            i__1004 = i__1004 + 1;
+            b__1084.appendSafe(", ");
+            b__1084.appendSafe(Core.listGet(this.setClauses, i__1085).getField().getSqlValue());
+            b__1084.appendSafe(" = ");
+            b__1084.appendPart(Core.listGet(this.setClauses, i__1085).getValue());
+            i__1085 = i__1085 + 1;
         }
-        b__1003.appendSafe(" WHERE ");
-        b__1003.appendFragment(Core.listGet(this.conditions, 0).getCondition());
-        int i__1005 = 1;
+        b__1084.appendSafe(" WHERE ");
+        b__1084.appendFragment(Core.listGet(this.conditions, 0).getCondition());
+        int i__1086 = 1;
         while (true) {
-            t_9904 = this.conditions.size();
-            if (i__1005 >= t_9904) {
+            t_10404 = this.conditions.size();
+            if (i__1086 >= t_10404) {
                 break;
             }
-            b__1003.appendSafe(" ");
-            b__1003.appendSafe(Core.listGet(this.conditions, i__1005).keyword());
-            b__1003.appendSafe(" ");
-            b__1003.appendFragment(Core.listGet(this.conditions, i__1005).getCondition());
-            i__1005 = i__1005 + 1;
+            b__1084.appendSafe(" ");
+            b__1084.appendSafe(Core.listGet(this.conditions, i__1086).keyword());
+            b__1084.appendSafe(" ");
+            b__1084.appendFragment(Core.listGet(this.conditions, i__1086).getCondition());
+            i__1086 = i__1086 + 1;
         }
-        @Nullable Integer lv__1006 = this.limitVal;
-        if (lv__1006 != null) {
-            int lv_1954 = lv__1006;
-            b__1003.appendSafe(" LIMIT ");
-            b__1003.appendInt32(lv_1954);
+        @Nullable Integer lv__1087 = this.limitVal;
+        if (lv__1087 != null) {
+            int lv_2075 = lv__1087;
+            b__1084.appendSafe(" LIMIT ");
+            b__1084.appendInt32(lv_2075);
         }
-        return b__1003.getAccumulated();
+        return b__1084.getAccumulated();
     }
     public static final class Builder {
         SafeIdentifier tableName;
@@ -122,11 +122,11 @@ public final class UpdateQuery {
             return new UpdateQuery(tableName, setClauses, conditions, limitVal);
         }
     }
-    public UpdateQuery(SafeIdentifier tableName__1008, List<SetClause> setClauses__1009, List<WhereClause> conditions__1010, @Nullable Integer limitVal__1011) {
-        this.tableName = tableName__1008;
-        this.setClauses = setClauses__1009;
-        this.conditions = conditions__1010;
-        this.limitVal = limitVal__1011;
+    public UpdateQuery(SafeIdentifier tableName__1089, List<SetClause> setClauses__1090, List<WhereClause> conditions__1091, @Nullable Integer limitVal__1092) {
+        this.tableName = tableName__1089;
+        this.setClauses = setClauses__1090;
+        this.conditions = conditions__1091;
+        this.limitVal = limitVal__1092;
     }
     public SafeIdentifier getTableName() {
         return this.tableName;

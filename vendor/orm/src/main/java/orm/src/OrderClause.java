@@ -1,7 +1,9 @@
 package orm.src;
+import temper.core.Nullable;
 public final class OrderClause {
     public final SafeIdentifier field;
     public final boolean ascending;
+    public final @Nullable NullsPosition nullsPos;
     public static final class Builder {
         SafeIdentifier field;
         public Builder field(SafeIdentifier field) {
@@ -15,28 +17,42 @@ public final class OrderClause {
             this.ascending = ascending;
             return this;
         }
+        @Nullable NullsPosition nullsPos;
+        boolean nullsPos__set;
+        public Builder nullsPos(@Nullable NullsPosition nullsPos) {
+            nullsPos__set = true;
+            this.nullsPos = nullsPos;
+            return this;
+        }
         public OrderClause build() {
-            if (!ascending__set || field == null) {
+            if (!ascending__set || !nullsPos__set || field == null) {
                 StringBuilder _message = new StringBuilder("Missing required fields:");
                 if (!ascending__set) {
                     _message.append(" ascending");
+                }
+                if (!nullsPos__set) {
+                    _message.append(" nullsPos");
                 }
                 if (field == null) {
                     _message.append(" field");
                 }
                 throw new IllegalStateException(_message.toString());
             }
-            return new OrderClause(field, ascending);
+            return new OrderClause(field, ascending, nullsPos);
         }
     }
-    public OrderClause(SafeIdentifier field__763, boolean ascending__764) {
-        this.field = field__763;
-        this.ascending = ascending__764;
+    public OrderClause(SafeIdentifier field__816, boolean ascending__817, @Nullable NullsPosition nullsPos__818) {
+        this.field = field__816;
+        this.ascending = ascending__817;
+        this.nullsPos = nullsPos__818;
     }
     public SafeIdentifier getField() {
         return this.field;
     }
     public boolean isAscending() {
         return this.ascending;
+    }
+    public @Nullable NullsPosition getNullsPos() {
+        return this.nullsPos;
     }
 }

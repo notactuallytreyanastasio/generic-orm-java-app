@@ -17,9 +17,9 @@ public final class SetClause {
             return new SetClause(field, value);
         }
     }
-    public SetClause(SafeIdentifier field__979, SqlPart value__980) {
-        this.field = field__979;
-        this.value = value__980;
+    public SetClause(SafeIdentifier field__1060, SqlPart value__1061) {
+        this.field = field__1060;
+        this.value = value__1061;
     }
     public SafeIdentifier getField() {
         return this.field;
