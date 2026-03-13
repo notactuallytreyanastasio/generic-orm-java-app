@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoApp - Search</title>
+    <link rel="stylesheet" th:href="@{/retro.css}">
+    <style>
+        .filter-btn { display:inline-block; margin:2px; text-decoration:none; }
+        .priority-badge { display:inline-block; padding:1px 6px; font-size:12px; border:1px solid #808080; min-width:18px; text-align:center; }
+        .p1 { background:#ff4444; color:white; }
+        .p2 { background:#ff8800; color:white; }
+        .p3 { background:#ffcc00; color:black; }
+        .p4 { background:#88cc44; color:white; }
+        .p5 { background:#4488cc; color:white; }
+    </style>
+</head>
+<body>
+
+<!-- Mac System 6 Menu Bar -->
+<div class="mac-menubar">
+    <span class="apple-logo">&#63743;</span>
+    <span class="menu-item app-name">TodoApp</span>
+    <a href="/" class="menu-item" style="text-decoration:none;color:inherit;">Lists</a>
+    <a href="/tags" class="menu-item" style="text-decoration:none;color:inherit;">Tags</a>
+    <a href="/search" class="menu-item" style="text-decoration:none;color:inherit;background:#000;color:#fff;">Search</a>
+    <a href="/advanced" class="menu-item" style="text-decoration:none;color:inherit;">Advanced</a>
+</div>
+
+<!-- Desktop -->
+<div class="desktop">
+    <div class="win95-window" style="max-width:800px;">
+        <!-- Title Bar -->
+        <div class="win95-titlebar">
+            <span class="title-text">Search &amp; Filter Todos</span>
+            <div class="win95-titlebar-buttons">
+                <button class="win95-titlebar-btn">_</button>
+                <button class="win95-titlebar-btn">&#9633;</button>
+                <button class="win95-titlebar-btn">X</button>
+            </div>
+        </div>
+
+        <!-- Toolbar: Search -->
+        <div class="win95-toolbar">
+            <a th:href="@{/}" class="win95-btn" style="text-decoration:none; min-width:auto;">&#8592; Back</a>
+            <form th:action="@{/search}" method="get" style="display:flex; gap:4px; flex:1; align-items:center;">
+                <input type="text" name="q" placeholder="Search by title (whereLike)..." class="win95-input"
+                       th:value="${query}">
+                <button type="submit" class="win95-btn primary">Search</button>
+            </form>
+        </div>
+
+        <!-- Filter buttons -->
+        <div style="padding:4px 8px; border-bottom:1px solid #808080; font-size:13px;">
+            <strong>ORM Query Filters:</strong><br>
+            <a href="/search?filter=no_due_date" class="win95-btn filter-btn" style="font-size:12px;padding:2px 8px;">whereNull (no due date)</a>
+            <a href="/search?filter=has_due_date" class="win95-btn filter-btn" style="font-size:12px;padding:2px 8px;">whereNotNull (has due date)</a>
+            <a href="/search?filter=high_priority" class="win95-btn filter-btn" style="font-size:12px;padding:2px 8px;">whereBetween (P1-P2)</a>
+            <a href="/search?filter=medium_priority" class="win95-btn filter-btn" style="font-size:12px;padding:2px 8px;">whereIn (P3)</a>
+            <a href="/search?filter=incomplete" class="win95-btn filter-btn" style="font-size:12px;padding:2px 8px;">whereNot (incomplete)</a>
+            <a href="/search?filter=high_or_done" class="win95-btn filter-btn" style="font-size:12px;padding:2px 8px;">where+orWhere (high/done)</a>
+            <a href="/search?filter=work_list" class="win95-btn filter-btn" style="font-size:12px;padding:2px 8px;">whereInSubquery (Work lists)</a>
+            <a href="/search?filter=page2" class="win95-btn filter-btn" style="font-size:12px;padding:2px 8px;">limit+offset (page 2)</a>
+            <a href="/search?filter=nulls_first" class="win95-btn filter-btn" style="font-size:12px;padding:2px 8px;">orderByNulls FIRST</a>
+            <a href="/search?filter=safe_limit" class="win95-btn filter-btn" style="font-size:12px;padding:2px 8px;">safeToSql(3)</a>
+        </div>
+
+        <!-- Description -->
+        <div th:if="${description != null and description != ''}" style="padding:4px 8px; background:#ffffcc; border-bottom:1px solid #808080; font-size:13px;">
+            <span th:text="${description}"></span>
+        </div>
+
+        <!-- Results -->
+        <div class="win95-body">
+            <div class="win95-sunken" style="min-height:200px; max-height:400px;">
+                <div th:if="${results == null or #lists.isEmpty(results)}" style="padding:20px; text-align:center; color:#808080;">
+                    No results. Try a search or click a filter above.
+                </div>
+
+                <div th:each="todo : ${results}" class="todo-item"
+                     th:classappend="${todo.completed != 0} ? 'completed' : ''">
+                    <span class="priority-badge"
+                          th:classappend="'p' + ${todo.priority}"
+                          th:text="${todo.priority}">3</span>
+                    <span class="todo-text">
+                        <span th:text="${todo.title}">Title</span>
+                        <span th:if="${todo.dueDate != null}" style="font-size:12px; color:#808080;"
+                              th:text="' (due: ' + ${todo.dueDate} + ')'"></span>
+                    </span>
+                    <span style="font-size:12px; color:#808080;" th:text="'[list ' + ${todo.listId} + ']'"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="win95-statusbar">
+            <div class="status-section">
+                <span th:text="${results != null ? #lists.size(results) : 0} + ' result(s)'">0 result(s)</span>
+            </div>
+            <div class="status-section">
+                Alloy ORM: whereLike, whereNull, whereBetween, whereIn, whereNot, orWhere, whereInSubquery
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

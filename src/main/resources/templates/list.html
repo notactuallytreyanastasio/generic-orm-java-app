@@ -10,6 +10,14 @@
         .todo-item:hover .edit-form { display: flex; }
         .todo-item:hover .todo-display { display: none; }
         .todo-display { display: flex; align-items: center; gap: 8px; flex: 1; }
+        .priority-badge { display:inline-block; padding:1px 6px; font-size:12px; border:1px solid #808080; min-width:18px; text-align:center; }
+        .p1 { background:#ff4444; color:white; }
+        .p2 { background:#ff8800; color:white; }
+        .p3 { background:#ffcc00; color:black; }
+        .p4 { background:#88cc44; color:white; }
+        .p5 { background:#4488cc; color:white; }
+        .tag-badge { display:inline-block; padding:1px 4px; font-size:11px; border:1px solid #808080; background:#e0e0e0; margin:0 2px; }
+        .due-date { font-size:12px; color:#808080; }
     </style>
 </head>
 <body>
@@ -18,14 +26,15 @@
 <div class="mac-menubar">
     <span class="apple-logo">&#63743;</span>
     <span class="menu-item app-name">TodoApp</span>
-    <span class="menu-item">File</span>
-    <span class="menu-item">Edit</span>
-    <span class="menu-item">Help</span>
+    <a href="/" class="menu-item" style="text-decoration:none;color:inherit;">Lists</a>
+    <a href="/tags" class="menu-item" style="text-decoration:none;color:inherit;">Tags</a>
+    <a href="/search" class="menu-item" style="text-decoration:none;color:inherit;">Search</a>
+    <a href="/advanced" class="menu-item" style="text-decoration:none;color:inherit;">Advanced</a>
 </div>
 
 <!-- Desktop -->
 <div class="desktop">
-    <div class="win95-window">
+    <div class="win95-window" style="max-width:800px;">
         <!-- Title Bar -->
         <div class="win95-titlebar">
             <span class="title-text" th:text="${list.name}">List Name</span>
@@ -41,14 +50,32 @@
             <a th:href="@{/}" class="win95-btn" style="text-decoration:none; min-width:auto;">&#8592; Back</a>
             <form th:action="@{/lists/{id}/todos(id=${list.id})}" method="post"
                   style="display:flex; gap:4px; flex:1; align-items:center;">
-                <input type="text" name="title" placeholder="New todo..." class="win95-input" required>
+                <input type="text" name="title" placeholder="New todo..." class="win95-input" style="flex:3;" required>
+                <select name="priority" class="win95-input" style="flex:0; width:60px;">
+                    <option value="1">P1</option>
+                    <option value="2">P2</option>
+                    <option value="3" selected>P3</option>
+                    <option value="4">P4</option>
+                    <option value="5">P5</option>
+                </select>
+                <input type="date" name="dueDate" class="win95-input" style="flex:1;">
                 <button type="submit" class="win95-btn primary">Add</button>
             </form>
         </div>
 
+        <!-- Error display -->
+        <div th:if="${errors != null}" style="padding:4px 8px; background:#ffcccc; border-bottom:1px solid #cc0000;">
+            <span th:each="err : ${errors}" th:text="${err}" style="display:block; font-size:13px; color:#cc0000;"></span>
+        </div>
+
+        <!-- Description -->
+        <div th:if="${list.description != null}" style="padding:4px 8px; background:#ffffcc; border-bottom:1px solid #808080; font-size:13px;">
+            <span th:text="${list.description}"></span>
+        </div>
+
         <!-- Body -->
         <div class="win95-body">
-            <div class="win95-sunken" style="min-height:200px; max-height:400px;">
+            <div class="win95-sunken" style="min-height:200px; max-height:500px;">
                 <!-- Empty State -->
                 <div th:if="${#lists.isEmpty(todos)}" style="padding:20px; text-align:center; color:#808080;">
                     No todos yet. Add one above!
@@ -56,23 +83,27 @@
 
                 <!-- Todo Items -->
                 <div th:each="todo : ${todos}" class="todo-item"
-                     th:classappend="${todo.completed} ? 'completed' : ''">
+                     th:classappend="${todo.completed != 0} ? 'completed' : ''">
 
                     <!-- Normal display -->
                     <div class="todo-display">
                         <form th:action="@{/todos/{id}/toggle(id=${todo.id})}" method="post" style="display:inline;">
                             <input type="checkbox" class="win95-checkbox"
-                                   th:checked="${todo.completed}"
+                                   th:checked="${todo.completed != 0}"
                                    onchange="this.form.submit();">
                         </form>
+                        <span class="priority-badge"
+                              th:classappend="'p' + ${todo.priority}"
+                              th:text="${todo.priority}">3</span>
                         <span class="todo-text" th:text="${todo.title}">Todo text</span>
+                        <span th:if="${todo.dueDate != null}" class="due-date" th:text="'Due: ' + ${todo.dueDate}"></span>
                     </div>
 
                     <!-- Edit form (visible on hover) -->
                     <div class="edit-form" style="gap:4px; flex:1; align-items:center;">
                         <form th:action="@{/todos/{id}/toggle(id=${todo.id})}" method="post" style="display:inline;">
                             <input type="checkbox" class="win95-checkbox"
-                                   th:checked="${todo.completed}"
+                                   th:checked="${todo.completed != 0}"
                                    onchange="this.form.submit();">
                         </form>
                         <form th:action="@{/todos/{id}/edit(id=${todo.id})}" method="post"
@@ -80,14 +111,31 @@
                             <input type="text" name="title" th:value="${todo.title}" class="win95-input" required>
                             <button type="submit" class="win95-btn" style="min-width:auto;">Save</button>
                         </form>
+                        <form th:action="@{/todos/{id}/priority(id=${todo.id})}" method="post" style="display:inline;">
+                            <select name="priority" class="win95-input" style="width:50px;" onchange="this.form.submit();">
+                                <option value="1" th:selected="${todo.priority == 1}">P1</option>
+                                <option value="2" th:selected="${todo.priority == 2}">P2</option>
+                                <option value="3" th:selected="${todo.priority == 3}">P3</option>
+                                <option value="4" th:selected="${todo.priority == 4}">P4</option>
+                                <option value="5" th:selected="${todo.priority == 5}">P5</option>
+                            </select>
+                        </form>
+                        <!-- Tag selector -->
+                        <form th:action="@{/todos/{todoId}/tags/{tagId}(todoId=${todo.id},tagId=0)}" method="post"
+                              style="display:inline;" class="tag-form">
+                            <select name="tagId" class="win95-input" style="width:80px;"
+                                    onchange="this.form.action=this.form.action.replace('/tags/0','/tags/'+this.value); this.form.submit();">
+                                <option value="">+Tag</option>
+                                <option th:each="tag : ${allTags}" th:value="${tag.id}" th:text="${tag.name}"></option>
+                            </select>
+                        </form>
                         <form th:action="@{/todos/{id}/delete(id=${todo.id})}" method="post" style="display:inline;">
                             <button type="submit" class="win95-btn danger" style="min-width:auto;">Del</button>
                         </form>
                     </div>
 
                     <!-- Actions (always visible) -->
-                    <div class="todo-actions" style="display:none;">
-                    </div>
+                    <div class="todo-actions" style="display:none;"></div>
                 </div>
             </div>
         </div>

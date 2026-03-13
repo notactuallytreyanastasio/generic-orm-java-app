@@ -9,57 +9,44 @@ public class TodoItem {
 
     private Long id;
     private String title;
-    private Boolean completed;
-    private LocalDateTime createdAt;
+    private int completed;
+    private int priority;
+    private String dueDate;
     private Long listId;
+    private String createdAt;
+
+    // Derived fields populated by joins/queries
+    private String listName;
+    private int tagCount;
 
     public TodoItem() {
     }
 
-    public TodoItem(String title, Long listId) {
-        this.title = title;
-        this.listId = listId;
-        this.completed = false;
-        this.createdAt = LocalDateTime.now();
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public int getCompleted() { return completed; }
+    public void setCompleted(int completed) { this.completed = completed; }
+    public boolean isCompleted() { return completed != 0; }
 
-    public String getTitle() {
-        return title;
-    }
+    public int getPriority() { return priority; }
+    public void setPriority(int priority) { this.priority = priority; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getDueDate() { return dueDate; }
+    public void setDueDate(String dueDate) { this.dueDate = dueDate; }
 
-    public Boolean getCompleted() {
-        return completed;
-    }
+    public Long getListId() { return listId; }
+    public void setListId(Long listId) { this.listId = listId; }
 
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
-    }
+    public String getCreatedAt() { return createdAt; }
+    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+    public String getListName() { return listName; }
+    public void setListName(String listName) { this.listName = listName; }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Long getListId() {
-        return listId;
-    }
-
-    public void setListId(Long listId) {
-        this.listId = listId;
-    }
+    public int getTagCount() { return tagCount; }
+    public void setTagCount(int tagCount) { this.tagCount = tagCount; }
 }

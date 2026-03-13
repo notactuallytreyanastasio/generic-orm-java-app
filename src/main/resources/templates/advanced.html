@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoApp - Advanced ORM Features</title>
+    <link rel="stylesheet" th:href="@{/retro.css}">
+    <style>
+        .sql-box { background:#000020; color:#00ff00; font-family:monospace; font-size:12px;
+                   padding:4px 8px; margin:2px 0; border:1px solid #404040; word-break:break-all;
+                   white-space:pre-wrap; }
+        .feature-name { font-weight:bold; font-size:13px; color:#000080; }
+        .section-header { background:#000080; color:white; padding:4px 8px; font-weight:bold; font-size:14px; margin-top:8px; }
+        .stat-box { display:inline-block; border:2px inset #808080; padding:4px 12px; margin:4px; text-align:center; background:white; }
+        .stat-label { font-size:11px; color:#808080; display:block; }
+        .stat-value { font-size:18px; font-weight:bold; }
+        .data-table { width:100%; border-collapse:collapse; font-size:13px; }
+        .data-table th { background:#c0c0c0; border:1px solid #808080; padding:2px 6px; text-align:left; }
+        .data-table td { border:1px solid #e0e0e0; padding:2px 6px; }
+        .valid-badge { background:#00cc00; color:white; padding:1px 6px; font-size:12px; }
+        .invalid-badge { background:#cc0000; color:white; padding:1px 6px; font-size:12px; }
+    </style>
+</head>
+<body>
+
+<!-- Mac System 6 Menu Bar -->
+<div class="mac-menubar">
+    <span class="apple-logo">&#63743;</span>
+    <span class="menu-item app-name">TodoApp</span>
+    <a href="/" class="menu-item" style="text-decoration:none;color:inherit;">Lists</a>
+    <a href="/tags" class="menu-item" style="text-decoration:none;color:inherit;">Tags</a>
+    <a href="/search" class="menu-item" style="text-decoration:none;color:inherit;">Search</a>
+    <a href="/advanced" class="menu-item" style="text-decoration:none;color:inherit;background:#000;color:#fff;">Advanced</a>
+</div>
+
+<!-- Desktop -->
+<div class="desktop" style="align-items:flex-start;">
+    <div class="win95-window" style="max-width:960px; min-width:700px;">
+        <!-- Title Bar -->
+        <div class="win95-titlebar">
+            <span class="title-text">Advanced ORM Feature Showcase</span>
+            <div class="win95-titlebar-buttons">
+                <button class="win95-titlebar-btn">_</button>
+                <button class="win95-titlebar-btn">&#9633;</button>
+                <button class="win95-titlebar-btn">X</button>
+            </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="win95-toolbar">
+            <a th:href="@{/}" class="win95-btn" style="text-decoration:none; min-width:auto;">&#8592; Back</a>
+            <span style="font-size:13px;">Demonstrating ALL Alloy ORM features with generated SQL</span>
+        </div>
+
+        <div class="win95-body" style="max-height:80vh; overflow-y:auto;">
+
+            <!-- ==================== AGGREGATE STATS ==================== -->
+            <div class="section-header">Aggregate Functions: countAll, countCol, sumCol, avgCol, minCol, maxCol</div>
+            <div style="padding:8px;">
+                <div class="stat-box">
+                    <span class="stat-label">countAll()</span>
+                    <span class="stat-value" th:text="${totalTodos}">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">countCol(due_date)</span>
+                    <span class="stat-value" th:text="${todosWithDueDate}">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">sumCol(priority)</span>
+                    <span class="stat-value" th:text="${sumPriorities}">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">avgCol(priority)</span>
+                    <span class="stat-value" th:text="${avgPriority}">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">minCol(priority)</span>
+                    <span class="stat-value" th:text="${minPriority}">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">maxCol(priority)</span>
+                    <span class="stat-value" th:text="${maxPriority}">0</span>
+                </div>
+            </div>
+
+            <!-- ==================== INNER JOIN ==================== -->
+            <div class="section-header">innerJoin: Todos with List Names</div>
+            <div style="padding:8px;">
+                <table class="data-table">
+                    <tr><th>ID</th><th>Title</th><th>List</th><th>Priority</th><th>Done</th></tr>
+                    <tr th:each="row : ${todosWithListNames}">
+                        <td th:text="${row.get('id')}"></td>
+                        <td th:text="${row.get('title')}"></td>
+                        <td th:text="${row.get('name')}"></td>
+                        <td th:text="${row.get('priority')}"></td>
+                        <td th:text="${row.get('completed')}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- ==================== LEFT JOIN ==================== -->
+            <div class="section-header">leftJoin + groupBy + countCol: Todos with Tag Counts</div>
+            <div style="padding:8px;">
+                <table class="data-table">
+                    <tr><th>ID</th><th>Title</th><th>Tag Count</th></tr>
+                    <tr th:each="row : ${todosWithTagCounts}">
+                        <td th:text="${row.get('id')}"></td>
+                        <td th:text="${row.get('title')}"></td>
+                        <td th:text="${row.get('tag_count')}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- ==================== GROUP BY + HAVING ==================== -->
+            <div class="section-header">groupBy + having: Lists with 3+ Todos</div>
+            <div style="padding:8px;">
+                <table class="data-table">
+                    <tr><th>List ID</th><th>Todo Count</th></tr>
+                    <tr th:each="row : ${listsWithMinTodos}">
+                        <td th:text="${row.get('list_id')}"></td>
+                        <td th:text="${row.get('todo_count')}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- ==================== EXISTS SUBQUERY ==================== -->
+            <div class="section-header">existsSql: Lists That Have Todos</div>
+            <div style="padding:8px;">
+                <table class="data-table">
+                    <tr><th>ID</th><th>Name</th><th>Todos</th></tr>
+                    <tr th:each="list : ${listsWithTodos}">
+                        <td th:text="${list.id}"></td>
+                        <td th:text="${list.name}"></td>
+                        <td th:text="${list.totalCount}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- ==================== DISTINCT ==================== -->
+            <div class="section-header">distinct: Unique Priorities in Use</div>
+            <div style="padding:8px;">
+                <span th:each="row : ${distinctPriorities}" style="display:inline-block; margin:2px;">
+                    <span class="stat-box" style="padding:2px 8px;">
+                        <span th:text="${row.get('priority')}">0</span>
+                    </span>
+                </span>
+            </div>
+
+            <!-- ==================== CHANGESET VALIDATION ==================== -->
+            <div class="section-header">Changeset Comprehensive Validation Demo</div>
+            <div style="padding:8px;">
+                <p style="font-size:13px;">
+                    Validates: cast, validateRequired, validateLength, validateInt, validateNumber (NumberValidationOpts),
+                    validateBool, validateInclusion, validateExclusion, validateContains, validateStartsWith,
+                    validateEndsWith, putChange, getChange, deleteChange
+                </p>
+                <span th:if="${validationResult.get('valid')}" class="valid-badge">VALID</span>
+                <span th:unless="${validationResult.get('valid')}" class="invalid-badge">INVALID</span>
+                <div th:if="${validationResult.get('errors') != null}">
+                    <span th:each="err : ${validationResult.get('errors')}" style="display:block; font-size:12px; color:#cc0000;" th:text="${err}"></span>
+                </div>
+                <div th:if="${validationResult.get('insertSql') != null}">
+                    <span class="feature-name">Generated INSERT:</span>
+                    <div class="sql-box" th:text="${validationResult.get('insertSql')}"></div>
+                </div>
+                <div th:if="${validationResult.get('updateSql') != null}">
+                    <span class="feature-name">Generated UPDATE:</span>
+                    <div class="sql-box" th:text="${validationResult.get('updateSql')}"></div>
+                </div>
+            </div>
+
+            <!-- ==================== ALL GENERATED SQL ==================== -->
+            <div class="section-header">Complete ORM Feature SQL Catalog (48 features)</div>
+            <div style="padding:8px;">
+                <div th:each="entry : ${allQueries}" style="margin-bottom:6px;">
+                    <span class="feature-name" th:text="${entry.key}"></span>
+                    <div class="sql-box" th:text="${entry.value}"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Status Bar -->
+        <div class="win95-statusbar">
+            <div class="status-section">
+                <span th:text="${#maps.size(allQueries)} + ' SQL features demonstrated'">0 features</span>
+            </div>
+            <div class="status-section">
+                Alloy ORM: ALL features
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

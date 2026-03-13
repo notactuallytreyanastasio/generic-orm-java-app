@@ -12,9 +12,10 @@
 <div class="mac-menubar">
     <span class="apple-logo">&#63743;</span>
     <span class="menu-item app-name">TodoApp</span>
-    <span class="menu-item">File</span>
-    <span class="menu-item">Edit</span>
-    <span class="menu-item">Help</span>
+    <a href="/" class="menu-item" style="text-decoration:none;color:inherit;">Lists</a>
+    <a href="/tags" class="menu-item" style="text-decoration:none;color:inherit;">Tags</a>
+    <a href="/search" class="menu-item" style="text-decoration:none;color:inherit;">Search</a>
+    <a href="/advanced" class="menu-item" style="text-decoration:none;color:inherit;">Advanced</a>
 </div>
 
 <!-- Desktop -->
@@ -33,7 +34,8 @@
         <!-- Toolbar: New List Form -->
         <div class="win95-toolbar">
             <form th:action="@{/lists}" method="post" style="display:flex; gap:4px; width:100%; align-items:center;">
-                <input type="text" name="name" placeholder="New list name..." class="win95-input" required>
+                <input type="text" name="name" placeholder="List name..." class="win95-input" style="flex:2;" required>
+                <input type="text" name="description" placeholder="Description (optional)..." class="win95-input" style="flex:3;">
                 <button type="submit" class="win95-btn primary">New List</button>
             </form>
         </div>
@@ -54,6 +56,9 @@
                         <span style="color:#808080; font-size:13px;"
                               th:text="'(' + ${list.completedCount} + '/' + ${list.totalCount} + ' done)'">
                         </span>
+                        <span th:if="${list.description != null}" style="color:#808080; font-size:12px; display:block;"
+                              th:text="${list.description}">
+                        </span>
                     </a>
                     <div class="todo-actions">
                         <a th:href="@{/lists/{id}(id=${list.id})}" class="win95-btn" style="text-decoration:none;">Open</a>
@@ -72,7 +77,10 @@
                 <span th:text="${#lists.size(lists)} + ' list(s)'">0 list(s)</span>
             </div>
             <div class="status-section">
-                Spring Boot + ORM + SQLite
+                <span th:text="${totalTodos} + ' total todos'">0 total todos</span>
+            </div>
+            <div class="status-section">
+                Spring Boot + Alloy ORM + SQLite
             </div>
         </div>
     </div>

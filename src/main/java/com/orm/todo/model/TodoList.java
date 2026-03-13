@@ -1,7 +1,5 @@
 package com.orm.todo.model;
 
-import java.time.LocalDateTime;
-
 /**
  * Plain POJO for a todo list. No JPA annotations -- mapped via JDBC + ORM.
  */
@@ -9,7 +7,8 @@ public class TodoList {
 
     private Long id;
     private String name;
-    private LocalDateTime createdAt;
+    private String description;
+    private String createdAt;
 
     // Derived counts populated by the repository layer
     private long completedCount;
@@ -18,48 +17,21 @@ public class TodoList {
     public TodoList() {
     }
 
-    public TodoList(String name) {
-        this.name = name;
-        this.createdAt = LocalDateTime.now();
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public String getName() {
-        return name;
-    }
+    public String getCreatedAt() { return createdAt; }
+    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public long getCompletedCount() { return completedCount; }
+    public void setCompletedCount(long completedCount) { this.completedCount = completedCount; }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public long getCompletedCount() {
-        return completedCount;
-    }
-
-    public void setCompletedCount(long completedCount) {
-        this.completedCount = completedCount;
-    }
-
-    public long getTotalCount() {
-        return totalCount;
-    }
-
-    public void setTotalCount(long totalCount) {
-        this.totalCount = totalCount;
-    }
+    public long getTotalCount() { return totalCount; }
+    public void setTotalCount(long totalCount) { this.totalCount = totalCount; }
 }
