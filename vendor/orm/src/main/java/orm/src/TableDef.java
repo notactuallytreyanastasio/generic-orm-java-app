@@ -6,37 +6,37 @@ public final class TableDef {
     public final SafeIdentifier tableName;
     public final List<FieldDef> fields;
     public final @Nullable SafeIdentifier primaryKey;
-    public FieldDef field(String name__1796) {
-        FieldDef return__603;
-        fn__1797: {
-            List<FieldDef> this__9149 = this.fields;
-            int n__9150 = this__9149.size();
-            int i__9151 = 0;
-            while (i__9151 < n__9150) {
-                FieldDef el__9152 = Core.listGet(this__9149, i__9151);
-                i__9151 = i__9151 + 1;
-                FieldDef f__1798 = el__9152;
-                if (f__1798.getName().getSqlValue().equals(name__1796)) {
-                    return__603 = f__1798;
-                    break fn__1797;
+    public FieldDef field(String name__1934) {
+        FieldDef return__646;
+        fn__1935: {
+            List<FieldDef> this__10148 = this.fields;
+            int n__10149 = this__10148.size();
+            int i__10150 = 0;
+            while (i__10150 < n__10149) {
+                FieldDef el__10151 = Core.listGet(this__10148, i__10150);
+                i__10150 = i__10150 + 1;
+                FieldDef f__1936 = el__10151;
+                if (f__1936.getName().getSqlValue().equals(name__1934)) {
+                    return__646 = f__1936;
+                    break fn__1935;
                 }
             }
             throw Core.bubble();
         }
-        return return__603;
+        return return__646;
     }
     public String pkName() {
-        String return__604;
-        fn__1800: {
-            @Nullable SafeIdentifier pk__1801 = this.primaryKey;
-            if (pk__1801 != null) {
-                SafeIdentifier pk_2609 = pk__1801;
-                return__604 = pk_2609.getSqlValue();
-                break fn__1800;
+        String return__647;
+        fn__1938: {
+            @Nullable SafeIdentifier pk__1939 = this.primaryKey;
+            if (pk__1939 != null) {
+                SafeIdentifier pk_2830 = pk__1939;
+                return__647 = pk_2830.getSqlValue();
+                break fn__1938;
             }
-            return__604 = "id";
+            return__647 = "id";
         }
-        return return__604;
+        return return__647;
     }
     public static final class Builder {
         SafeIdentifier tableName;
@@ -73,10 +73,10 @@ public final class TableDef {
             return new TableDef(tableName, fields, primaryKey);
         }
     }
-    public TableDef(SafeIdentifier tableName__1803, List<FieldDef> fields__1804, @Nullable SafeIdentifier primaryKey__1805) {
-        this.tableName = tableName__1803;
-        this.fields = fields__1804;
-        this.primaryKey = primaryKey__1805;
+    public TableDef(SafeIdentifier tableName__1941, List<FieldDef> fields__1942, @Nullable SafeIdentifier primaryKey__1943) {
+        this.tableName = tableName__1941;
+        this.fields = fields__1942;
+        this.primaryKey = primaryKey__1943;
     }
     public SafeIdentifier getTableName() {
         return this.tableName;

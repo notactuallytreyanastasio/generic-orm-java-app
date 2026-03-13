@@ -4,8 +4,8 @@ package orm.src;
  * with server-side default values (e.g., `NOW()` for timestamps).
  */
 public final class SqlDefault implements SqlPart {
-    public void formatTo(StringBuilder builder__1956) {
-        builder__1956.append("DEFAULT");
+    public void formatTo(StringBuilder builder__2102) {
+        builder__2102.append("DEFAULT");
     }
     public SqlDefault() {
     }

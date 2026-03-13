@@ -61,12 +61,12 @@ public final class FieldDef {
             return new FieldDef(name, fieldType, nullable, defaultValue, virtual);
         }
     }
-    public FieldDef(SafeIdentifier name__1787, FieldType fieldType__1788, boolean nullable__1789, @Nullable SqlPart defaultValue__1790, boolean virtual__1791) {
-        this.name = name__1787;
-        this.fieldType = fieldType__1788;
-        this.nullable = nullable__1789;
-        this.defaultValue = defaultValue__1790;
-        this.virtual = virtual__1791;
+    public FieldDef(SafeIdentifier name__1925, FieldType fieldType__1926, boolean nullable__1927, @Nullable SqlPart defaultValue__1928, boolean virtual__1929) {
+        this.name = name__1925;
+        this.fieldType = fieldType__1926;
+        this.nullable = nullable__1927;
+        this.defaultValue = defaultValue__1928;
+        this.virtual = virtual__1929;
     }
     public SafeIdentifier getName() {
         return this.name;

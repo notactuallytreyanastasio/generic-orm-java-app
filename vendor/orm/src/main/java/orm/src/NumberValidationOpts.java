@@ -65,12 +65,12 @@ public final class NumberValidationOpts {
             return new NumberValidationOpts(greaterThan, lessThan, greaterThanOrEqual, lessThanOrEqual, equalTo);
         }
     }
-    public NumberValidationOpts(@Nullable Double greaterThan__678, @Nullable Double lessThan__679, @Nullable Double greaterThanOrEqual__680, @Nullable Double lessThanOrEqual__681, @Nullable Double equalTo__682) {
-        this.greaterThan = greaterThan__678;
-        this.lessThan = lessThan__679;
-        this.greaterThanOrEqual = greaterThanOrEqual__680;
-        this.lessThanOrEqual = lessThanOrEqual__681;
-        this.equalTo = equalTo__682;
+    public NumberValidationOpts(@Nullable Double greaterThan__725, @Nullable Double lessThan__726, @Nullable Double greaterThanOrEqual__727, @Nullable Double lessThanOrEqual__728, @Nullable Double equalTo__729) {
+        this.greaterThan = greaterThan__725;
+        this.lessThan = lessThan__726;
+        this.greaterThanOrEqual = greaterThanOrEqual__727;
+        this.lessThanOrEqual = lessThanOrEqual__728;
+        this.equalTo = equalTo__729;
     }
     public @Nullable Double getGreaterThan() {
         return this.greaterThan;

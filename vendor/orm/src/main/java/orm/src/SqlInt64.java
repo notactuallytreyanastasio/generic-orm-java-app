@@ -1,12 +1,12 @@
 package orm.src;
 public final class SqlInt64 implements SqlPart {
     public final long value;
-    public void formatTo(StringBuilder builder__1951) {
-        String t_15532 = Long.toString(this.value);
-        builder__1951.append(t_15532);
+    public void formatTo(StringBuilder builder__2097) {
+        String t_17351 = Long.toString(this.value);
+        builder__2097.append(t_17351);
     }
-    public SqlInt64(long value__1954) {
-        this.value = value__1954;
+    public SqlInt64(long value__2100) {
+        this.value = value__2100;
     }
     public long getValue() {
         return this.value;
