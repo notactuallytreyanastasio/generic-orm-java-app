@@ -1,6 +1,6 @@
-# Generic ORM — Java Demo App
+# Alloy — Java Demo App
 
-A todo-list application built with Spring Boot, Thymeleaf, and SQLite JDBC, demonstrating the [Generic ORM](https://github.com/notactuallytreyanastasio/generic_orm) compiled from Temper to Java.
+A todo-list application built with Spring Boot, Thymeleaf, and SQLite JDBC, demonstrating the [Alloy](https://github.com/notactuallytreyanastasio/alloy) compiled from Temper to Java.
 
 ## Stack
 
@@ -9,7 +9,7 @@ A todo-list application built with Spring Boot, Thymeleaf, and SQLite JDBC, demo
 | Framework | Spring Boot 3.2.5 |
 | Templates | Thymeleaf |
 | Database | SQLite via sqlite-jdbc 3.45 |
-| ORM | [Generic ORM](https://github.com/notactuallytreyanastasio/generic_orm) (vendored) |
+| ORM | [Alloy](https://github.com/notactuallytreyanastasio/alloy) (vendored) |
 | Port | 5004 |
 
 ## ORM Usage
@@ -55,4 +55,4 @@ The `vendor/` directory contains the ORM compiled from Temper to Java source fil
 
 ---
 
-Part of the [Generic ORM](https://github.com/notactuallytreyanastasio/generic_orm) project — write once in Temper, secure everywhere.
+Part of the [Alloy](https://github.com/notactuallytreyanastasio/alloy) project — write once in Temper, secure everywhere.

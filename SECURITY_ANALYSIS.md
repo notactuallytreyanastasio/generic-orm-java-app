@@ -115,7 +115,7 @@ Schema creation uses hardcoded `CREATE TABLE` statements.
 ## Evolution: Temper-Level Remediation
 
 **Date:** 2026-03-12
-**Commit:** [`1df8c7a`](https://github.com/notactuallytreyanastasio/generic_orm/commit/1df8c7a)
+**Commit:** [`1df8c7a`](https://github.com/notactuallytreyanastasio/alloy/commit/1df8c7a)
 
 The security analysis above identified 3 ORM-level concerns (ORM-1, ORM-2, ORM-3) shared across all 6 app implementations. Because the ORM is written once in Temper and compiled to all backends, fixing these issues at the Temper source level automatically resolves them in every language — including this Java app.
 
