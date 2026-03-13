@@ -1,12 +1,12 @@
 package orm.src;
 public final class SqlInt32 implements SqlPart {
     public final int value;
-    public void formatTo(StringBuilder builder__790) {
-        String t_5086 = Integer.toString(this.value);
-        builder__790.append(t_5086);
+    public void formatTo(StringBuilder builder__898) {
+        String t_5772 = Integer.toString(this.value);
+        builder__898.append(t_5772);
     }
-    public SqlInt32(int value__793) {
-        this.value = value__793;
+    public SqlInt32(int value__901) {
+        this.value = value__901;
     }
     public int getValue() {
         return this.value;

@@ -4,21 +4,21 @@ import temper.core.Core;
 import java.util.function.IntConsumer;
 public final class SqlDate implements SqlPart {
     public final LocalDate value;
-    public void formatTo(StringBuilder builder__776) {
-        builder__776.append("'");
-        String t_5077 = this.value.toString();
-        IntConsumer fn__5075 = c__778 -> {
-            if (c__778 == 39) {
-                builder__776.append("''");
+    public void formatTo(StringBuilder builder__884) {
+        builder__884.append("'");
+        String t_5763 = this.value.toString();
+        IntConsumer fn__5761 = c__886 -> {
+            if (c__886 == 39) {
+                builder__884.append("''");
             } else {
-                Core.stringBuilderAppendCodePoint(builder__776, c__778);
+                Core.stringBuilderAppendCodePoint(builder__884, c__886);
             }
         };
-        Core.stringForEach(t_5077, fn__5075);
-        builder__776.append("'");
+        Core.stringForEach(t_5763, fn__5761);
+        builder__884.append("'");
     }
-    public SqlDate(LocalDate value__780) {
-        this.value = value__780;
+    public SqlDate(LocalDate value__888) {
+        this.value = value__888;
     }
     public LocalDate getValue() {
         return this.value;

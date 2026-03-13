@@ -38,10 +38,10 @@ public final class FieldDef {
             return new FieldDef(name, fieldType, nullable);
         }
     }
-    public FieldDef(SafeIdentifier name__652, FieldType fieldType__653, boolean nullable__654) {
-        this.name = name__652;
-        this.fieldType = fieldType__653;
-        this.nullable = nullable__654;
+    public FieldDef(SafeIdentifier name__760, FieldType fieldType__761, boolean nullable__762) {
+        this.name = name__760;
+        this.fieldType = fieldType__761;
+        this.nullable = nullable__762;
     }
     public SafeIdentifier getName() {
         return this.name;
