@@ -29,9 +29,9 @@ public final class OrderClause {
             return new OrderClause(field, ascending);
         }
     }
-    public OrderClause(SafeIdentifier field__719, boolean ascending__720) {
-        this.field = field__719;
-        this.ascending = ascending__720;
+    public OrderClause(SafeIdentifier field__763, boolean ascending__764) {
+        this.field = field__763;
+        this.ascending = ascending__764;
     }
     public SafeIdentifier getField() {
         return this.field;

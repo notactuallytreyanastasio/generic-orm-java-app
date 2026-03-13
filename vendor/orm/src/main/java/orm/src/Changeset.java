@@ -6,13 +6,13 @@ public interface Changeset {
     Map<String, String> getChanges();
     List<ChangesetError> getErrors();
     boolean isValid();
-    Changeset cast(List<SafeIdentifier> allowedFields__480);
-    Changeset validateRequired(List<SafeIdentifier> fields__483);
-    Changeset validateLength(SafeIdentifier field__486, int min__487, int max__488);
-    Changeset validateInt(SafeIdentifier field__491);
-    Changeset validateInt64(SafeIdentifier field__494);
-    Changeset validateFloat(SafeIdentifier field__497);
-    Changeset validateBool(SafeIdentifier field__500);
+    Changeset cast(List<SafeIdentifier> allowedFields__524);
+    Changeset validateRequired(List<SafeIdentifier> fields__527);
+    Changeset validateLength(SafeIdentifier field__530, int min__531, int max__532);
+    Changeset validateInt(SafeIdentifier field__535);
+    Changeset validateInt64(SafeIdentifier field__538);
+    Changeset validateFloat(SafeIdentifier field__541);
+    Changeset validateBool(SafeIdentifier field__544);
     SqlFragment toInsertSql();
-    SqlFragment toUpdateSql(int id__505);
+    SqlFragment toUpdateSql(int id__549);
 }

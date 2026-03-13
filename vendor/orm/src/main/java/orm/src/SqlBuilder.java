@@ -8,105 +8,105 @@ import java.util.function.IntConsumer;
 import java.util.function.DoubleConsumer;
 public final class SqlBuilder {
     final List<SqlPart> buffer;
-    public void appendSafe(String sqlSource__1171) {
-        SqlSource t_9641 = new SqlSource(sqlSource__1171);
-        Core.listAdd(this.buffer, t_9641);
+    public void appendSafe(String sqlSource__1304) {
+        SqlSource t_10895 = new SqlSource(sqlSource__1304);
+        Core.listAdd(this.buffer, t_10895);
     }
-    public void appendFragment(SqlFragment fragment__1174) {
-        List<SqlPart> t_9639 = fragment__1174.getParts();
-        Core.listAddAll(this.buffer, t_9639);
+    public void appendFragment(SqlFragment fragment__1307) {
+        List<SqlPart> t_10893 = fragment__1307.getParts();
+        Core.listAddAll(this.buffer, t_10893);
     }
-    public void appendPart(SqlPart part__1177) {
-        Core.listAdd(this.buffer, part__1177);
+    public void appendPart(SqlPart part__1310) {
+        Core.listAdd(this.buffer, part__1310);
     }
-    public void appendPartList(List<SqlPart> values__1180) {
-        Consumer<SqlPart> fn__9635 = x__1182 -> {
-            this.appendPart(x__1182);
+    public void appendPartList(List<SqlPart> values__1313) {
+        Consumer<SqlPart> fn__10889 = x__1315 -> {
+            this.appendPart(x__1315);
         };
-        this.appendList(values__1180, fn__9635);
+        this.appendList(values__1313, fn__10889);
     }
-    public void appendBoolean(boolean value__1184) {
-        SqlBoolean t_9632 = new SqlBoolean(value__1184);
-        Core.listAdd(this.buffer, t_9632);
+    public void appendBoolean(boolean value__1317) {
+        SqlBoolean t_10886 = new SqlBoolean(value__1317);
+        Core.listAdd(this.buffer, t_10886);
     }
-    public void appendBooleanList(List<Boolean> values__1187) {
-        Consumer<Boolean> fn__9629 = x__1189 -> {
-            this.appendBoolean(x__1189);
+    public void appendBooleanList(List<Boolean> values__1320) {
+        Consumer<Boolean> fn__10883 = x__1322 -> {
+            this.appendBoolean(x__1322);
         };
-        this.appendList(values__1187, fn__9629);
+        this.appendList(values__1320, fn__10883);
     }
-    public void appendDate(LocalDate value__1191) {
-        SqlDate t_9626 = new SqlDate(value__1191);
-        Core.listAdd(this.buffer, t_9626);
+    public void appendDate(LocalDate value__1324) {
+        SqlDate t_10880 = new SqlDate(value__1324);
+        Core.listAdd(this.buffer, t_10880);
     }
-    public void appendDateList(List<LocalDate> values__1194) {
-        Consumer<LocalDate> fn__9623 = x__1196 -> {
-            this.appendDate(x__1196);
+    public void appendDateList(List<LocalDate> values__1327) {
+        Consumer<LocalDate> fn__10877 = x__1329 -> {
+            this.appendDate(x__1329);
         };
-        this.appendList(values__1194, fn__9623);
+        this.appendList(values__1327, fn__10877);
     }
-    public void appendFloat64(double value__1198) {
-        SqlFloat64 t_9620 = new SqlFloat64(value__1198);
-        Core.listAdd(this.buffer, t_9620);
+    public void appendFloat64(double value__1331) {
+        SqlFloat64 t_10874 = new SqlFloat64(value__1331);
+        Core.listAdd(this.buffer, t_10874);
     }
-    public void appendFloat64List(List<Double> values__1201) {
-        DoubleConsumer fn__9617 = x__1203 -> {
-            this.appendFloat64(x__1203);
+    public void appendFloat64List(List<Double> values__1334) {
+        DoubleConsumer fn__10871 = x__1336 -> {
+            this.appendFloat64(x__1336);
         };
-        this.appendList(values__1201, fn__9617 :: accept);
+        this.appendList(values__1334, fn__10871 :: accept);
     }
-    public void appendInt32(int value__1205) {
-        SqlInt32 t_9614 = new SqlInt32(value__1205);
-        Core.listAdd(this.buffer, t_9614);
+    public void appendInt32(int value__1338) {
+        SqlInt32 t_10868 = new SqlInt32(value__1338);
+        Core.listAdd(this.buffer, t_10868);
     }
-    public void appendInt32List(List<Integer> values__1208) {
-        IntConsumer fn__9611 = x__1210 -> {
-            this.appendInt32(x__1210);
+    public void appendInt32List(List<Integer> values__1341) {
+        IntConsumer fn__10865 = x__1343 -> {
+            this.appendInt32(x__1343);
         };
-        this.appendList(values__1208, fn__9611 :: accept);
+        this.appendList(values__1341, fn__10865 :: accept);
     }
-    public void appendInt64(long value__1212) {
-        SqlInt64 t_9608 = new SqlInt64(value__1212);
-        Core.listAdd(this.buffer, t_9608);
+    public void appendInt64(long value__1345) {
+        SqlInt64 t_10862 = new SqlInt64(value__1345);
+        Core.listAdd(this.buffer, t_10862);
     }
-    public void appendInt64List(List<Long> values__1215) {
-        Consumer<Long> fn__9605 = x__1217 -> {
-            this.appendInt64(x__1217);
+    public void appendInt64List(List<Long> values__1348) {
+        Consumer<Long> fn__10859 = x__1350 -> {
+            this.appendInt64(x__1350);
         };
-        this.appendList(values__1215, fn__9605);
+        this.appendList(values__1348, fn__10859);
     }
-    public void appendString(String value__1219) {
-        SqlString t_9602 = new SqlString(value__1219);
-        Core.listAdd(this.buffer, t_9602);
+    public void appendString(String value__1352) {
+        SqlString t_10856 = new SqlString(value__1352);
+        Core.listAdd(this.buffer, t_10856);
     }
-    public void appendStringList(List<String> values__1222) {
-        Consumer<String> fn__9599 = x__1224 -> {
-            this.appendString(x__1224);
+    public void appendStringList(List<String> values__1355) {
+        Consumer<String> fn__10853 = x__1357 -> {
+            this.appendString(x__1357);
         };
-        this.appendList(values__1222, fn__9599);
+        this.appendList(values__1355, fn__10853);
     }
-    <T__237> void appendList(List<T__237> values__1226, Consumer<T__237> appendValue__1227) {
-        int t_9594;
-        T__237 t_9596;
-        int i__1229 = 0;
+    <T__259> void appendList(List<T__259> values__1359, Consumer<T__259> appendValue__1360) {
+        int t_10848;
+        T__259 t_10850;
+        int i__1362 = 0;
         while (true) {
-            t_9594 = values__1226.size();
-            if (i__1229 >= t_9594) {
+            t_10848 = values__1359.size();
+            if (i__1362 >= t_10848) {
                 break;
             }
-            if (i__1229 > 0) {
+            if (i__1362 > 0) {
                 this.appendSafe(", ");
             }
-            t_9596 = Core.listGet(values__1226, i__1229);
-            appendValue__1227.accept(t_9596);
-            i__1229 = i__1229 + 1;
+            t_10850 = Core.listGet(values__1359, i__1362);
+            appendValue__1360.accept(t_10850);
+            i__1362 = i__1362 + 1;
         }
     }
     public SqlFragment getAccumulated() {
         return new SqlFragment(List.copyOf(this.buffer));
     }
     public SqlBuilder() {
-        List<SqlPart> t_9591 = new ArrayList<>();
-        this.buffer = t_9591;
+        List<SqlPart> t_10845 = new ArrayList<>();
+        this.buffer = t_10845;
     }
 }

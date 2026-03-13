@@ -1,4 +1,4 @@
 package orm.src;
 public interface SqlPart {
-    void formatTo(StringBuilder builder__1246);
+    void formatTo(StringBuilder builder__1379);
 }

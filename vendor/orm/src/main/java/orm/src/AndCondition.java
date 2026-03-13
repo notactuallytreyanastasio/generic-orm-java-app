@@ -7,7 +7,7 @@ public final class AndCondition implements WhereClause {
     public String keyword() {
         return "AND";
     }
-    public AndCondition(SqlFragment _condition__731) {
-        this._condition = _condition__731;
+    public AndCondition(SqlFragment _condition__775) {
+        this._condition = _condition__775;
     }
 }
