@@ -4,7 +4,7 @@ final class ValidatedIdentifier implements SafeIdentifier {
     public String getSqlValue() {
         return this._value;
     }
-    public ValidatedIdentifier(String _value__742) {
-        this._value = _value__742;
+    public ValidatedIdentifier(String _value__898) {
+        this._value = _value__898;
     }
 }

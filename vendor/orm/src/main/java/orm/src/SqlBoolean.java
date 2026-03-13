@@ -1,17 +1,17 @@
 package orm.src;
 public final class SqlBoolean implements SqlPart {
     public final boolean value;
-    public void formatTo(StringBuilder builder__878) {
-        String t_3437;
+    public void formatTo(StringBuilder builder__1034) {
+        String t_4218;
         if (this.value) {
-            t_3437 = "TRUE";
+            t_4218 = "TRUE";
         } else {
-            t_3437 = "FALSE";
+            t_4218 = "FALSE";
         }
-        builder__878.append(t_3437);
+        builder__1034.append(t_4218);
     }
-    public SqlBoolean(boolean value__881) {
-        this.value = value__881;
+    public SqlBoolean(boolean value__1037) {
+        this.value = value__1037;
     }
     public boolean isValue() {
         return this.value;
